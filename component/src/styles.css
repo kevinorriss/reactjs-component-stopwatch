@@ -1,0 +1,19 @@
+.stopwatch {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+}
+
+.stopwatch__face {
+    background-color: green;
+    padding: 0 2rem;
+}
+
+.stopwatch__laps {
+    background-color: blue;
+    height: 5rem;
+}
+
+.stopwatch__controls {
+    background-color: yellow;
+}

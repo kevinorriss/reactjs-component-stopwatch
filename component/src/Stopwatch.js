@@ -4,6 +4,7 @@ import Moment from 'react-moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStopwatch, faUndo, faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 import 'react-circular-progressbar/dist/styles.css'
+import './styles.css'
 
 class Stopwatch extends React.Component {
     constructor(props) {
@@ -76,41 +77,46 @@ class Stopwatch extends React.Component {
 
     render() {
         return (
-            <Fragment>
-            <div className="pl-5 pr-5">
-                <CircularProgressbarWithChildren value={this.state.elapsed % 60000} maxValue={60000} className="d-felx align-items-center" styles={{path:{transition: 'none'}}}>
-                    <h3 className="mt-4"><Moment format="mm:ss.SS">{this.state.elapsed}</Moment></h3>
-                    <p className="mb-0"><Moment format="mm:ss.SS">{this.state.lapElapsed}</Moment></p>
-                </CircularProgressbarWithChildren>
-            </div>
-            <div className="stopwatch-laps flex-grow-1">
-                {this.state.laps.map((lap, index) => (
-                    <div key={index}>
-                        <div className="d-flex">
-                            <div className="col-6 d-flex flex-column ml-1">
-                                <div className="font-weight-bold" style={{ lineHeight: '1rem'}}>Lap {this.state.laps.length - index}</div>
-                                <div style={{ lineHeight: '1rem'}}><small>Elapsed <Moment format="mm:ss.SS">{lap.elapsed}</Moment></small></div>
+            <div className="stopwatch">
+                <div className="stopwatch__face">
+                    <CircularProgressbarWithChildren
+                        className="face__progress"
+                        value={this.state.elapsed % 60000}
+                        maxValue={60000}
+                        styles={{path:{transition: 'none'}}}
+                    >
+                        <h3><Moment format="mm:ss.SS">{this.state.elapsed}</Moment></h3>
+                        <p><Moment format="mm:ss.SS">{this.state.lapElapsed}</Moment></p>
+                    </CircularProgressbarWithChildren>
+                </div>
+                <div className="stopwatch__laps">
+                    {this.state.laps.map((lap, index) => (
+                        <div key={index}>
+                            <div className="d-flex">
+                                <div className="col-6 d-flex flex-column ml-1">
+                                    <div className="font-weight-bold" style={{ lineHeight: '1rem'}}>Lap {this.state.laps.length - index}</div>
+                                    <div style={{ lineHeight: '1rem'}}><small>Elapsed <Moment format="mm:ss.SS">{lap.elapsed}</Moment></small></div>
+                                </div>
+                                <div className="col-6 d-flex flex-row-reverse align-items-center mr-1">
+                                    <h4 className="font-weight-bold mb-0"><Moment format="mm:ss.SS">{lap.created}</Moment></h4>
+                                </div>
                             </div>
-                            <div className="col-6 d-flex flex-row-reverse align-items-center mr-1">
-                                <h4 className="font-weight-bold mb-0"><Moment format="mm:ss.SS">{lap.created}</Moment></h4>
-                            </div>
+                            <hr className="mt-1 mb-1"/>
                         </div>
-                        <hr className="mt-1 mb-1"/>
-                    </div>
-                ))}
+                    ))}
+                </div>
+                <div className="stopwatch__controls">
+                    <button className="btn" onClick={this.handleReset}>
+                        <FontAwesomeIcon icon={faUndo}/>
+                    </button>
+                    <button className="btn btn-light border shadow-sm" onClick={this.handlePlayPause}>
+                        <FontAwesomeIcon icon={this.state.counting ? faPause : faPlay} />
+                    </button>
+                    <button className="btn" onClick={this.onLap} disabled={!this.state.counting}>
+                        <FontAwesomeIcon icon={faStopwatch} />
+                    </button>
+                </div>
             </div>
-            <div className="d-flex justify-content-around ml-5 mr-5">
-                <button className="btn" onClick={this.handleReset}>
-                    <FontAwesomeIcon icon={faUndo}/>
-                </button>
-                <button className="btn btn-light border shadow-sm" onClick={this.handlePlayPause}>
-                    <FontAwesomeIcon icon={this.state.counting ? faPause : faPlay} />
-                </button>
-                <button className="btn" onClick={this.onLap} disabled={!this.state.counting}>
-                    <FontAwesomeIcon icon={faStopwatch} />
-                </button>
-            </div>
-        </Fragment>
         )
     }
 }
