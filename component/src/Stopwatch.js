@@ -84,34 +84,31 @@ class Stopwatch extends React.Component {
                         maxValue={60000}
                         styles={{path:{transition: 'none'}}}
                     >
-                        <h3 className="face__time face__time--elapsed"><Moment format="mm:ss.SS">{this.state.elapsed}</Moment></h3>
-                        <p className="face__time face__time--lap-elapsed"><Moment format="mm:ss.SS">{this.state.lapElapsed}</Moment></p>
+                        <Moment className="face__time--elapsed" format="mm:ss.SS">{this.state.elapsed}</Moment>
+                        <Moment format="mm:ss.SS">{this.state.lapElapsed}</Moment>
                     </CircularProgressbarWithChildren>
                 </div>
                 <div className="stopwatch__laps">
                     {this.state.laps.map((lap, index) => (
-                        <div key={index}>
-                            <div className="d-flex">
-                                <div className="col-6 d-flex flex-column ml-1">
-                                    <div className="font-weight-bold" style={{ lineHeight: '1rem'}}>Lap {this.state.laps.length - index}</div>
-                                    <div style={{ lineHeight: '1rem'}}><small>Elapsed <Moment format="mm:ss.SS">{lap.elapsed}</Moment></small></div>
-                                </div>
-                                <div className="col-6 d-flex flex-row-reverse align-items-center mr-1">
-                                    <h4 className="font-weight-bold mb-0"><Moment format="mm:ss.SS">{lap.created}</Moment></h4>
-                                </div>
+                        <div key={index} className="">
+                            <div className="col-6 d-flex flex-column ml-1">
+                                <div className="font-weight-bold" style={{ lineHeight: '1rem'}}>Lap {this.state.laps.length - index}</div>
+                                <div style={{ lineHeight: '1rem'}}><small>Elapsed <Moment format="mm:ss.SS">{lap.elapsed}</Moment></small></div>
                             </div>
-                            <hr className="mt-1 mb-1"/>
+                            <div className="col-6 d-flex flex-row-reverse align-items-center mr-1">
+                                <h4 className="font-weight-bold mb-0"><Moment format="mm:ss.SS">{lap.created}</Moment></h4>
+                            </div>
                         </div>
                     ))}
                 </div>
                 <div className="stopwatch__controls">
-                    <button className="btn" onClick={this.handleReset}>
+                    <button className="controls__button" onClick={this.handleReset}>
                         <FontAwesomeIcon icon={faUndo}/>
                     </button>
-                    <button className="btn btn-light border shadow-sm" onClick={this.handlePlayPause}>
+                    <button className="controls__button controls__button--play" onClick={this.handlePlayPause}>
                         <FontAwesomeIcon icon={this.state.counting ? faPause : faPlay} />
                     </button>
-                    <button className="btn" onClick={this.onLap} disabled={!this.state.counting}>
+                    <button className="controls__button" onClick={this.onLap} disabled={!this.state.counting}>
                         <FontAwesomeIcon icon={faStopwatch} />
                     </button>
                 </div>
