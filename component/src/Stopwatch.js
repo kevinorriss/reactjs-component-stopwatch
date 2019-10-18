@@ -80,13 +80,12 @@ class Stopwatch extends React.Component {
             <div className="stopwatch">
                 <div className="stopwatch__face">
                     <CircularProgressbarWithChildren
-                        className="face__progress"
                         value={this.state.elapsed % 60000}
                         maxValue={60000}
                         styles={{path:{transition: 'none'}}}
                     >
-                        <h3><Moment format="mm:ss.SS">{this.state.elapsed}</Moment></h3>
-                        <p><Moment format="mm:ss.SS">{this.state.lapElapsed}</Moment></p>
+                        <h3 className="face__time face__time--elapsed"><Moment format="mm:ss.SS">{this.state.elapsed}</Moment></h3>
+                        <p className="face__time face__time--lap-elapsed"><Moment format="mm:ss.SS">{this.state.lapElapsed}</Moment></p>
                     </CircularProgressbarWithChildren>
                 </div>
                 <div className="stopwatch__laps">
