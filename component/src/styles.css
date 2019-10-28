@@ -12,7 +12,7 @@
 
 .face__time--elapsed {
     font-weight: bolder;
-    font-size: 1.75rem;
+    font-size: 1.4rem;
 }
 
 .stopwatch__laps {
@@ -41,4 +41,28 @@
 .controls__button--play {
     background-color: #F6F6F6;
     border: 1px solid #CCC;
+}
+
+.stopwatch__laps {
+    display: flex;
+    flex-direction: column;
+    line-height: 1rem;
+}
+
+.laps__entry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.3rem;
+    border-bottom: 1px solid #CCC;
+}
+
+.entry__elapsed h4 {
+    margin: 0;
+}
+
+.entry__created {
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
 }
