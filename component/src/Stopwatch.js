@@ -4,12 +4,13 @@ import Moment from 'react-moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStopwatch, faUndo, faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 import 'react-circular-progressbar/dist/styles.css'
+import './styles.css'
 
 class Stopwatch extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {
+        this.initialState = {
             counting: false,
             started: 0,
             elapsed: 0,
@@ -18,99 +19,100 @@ class Stopwatch extends React.Component {
             laps: [],
             timer: null
         }
+        this.state = { ...this.initialState }
+
+        this.tick = this.tick.bind(this)
+        this.handlePlayPause = this.handlePlayPause.bind(this)
+        this.handleLap = this.handleLap.bind(this)
+        this.handleReset = this.handleReset.bind(this)
     }
 
     tick() {
-        console.log('tick()')
-        // const now = new Date().getTime()
-        //     // calculate the elapsed time since starting
-        //     setState(s => ({
-        //         ...s,
-        //         elapsed: now - s.started,
-        //         lapElapsed: now - s.lapStarted
-        //     }))
+        // calculate the elapsed time since starting
+        const now = new Date().getTime()
+        this.setState(prevState => ({
+            ...prevState,
+            elapsed: now - prevState.started,
+            lapElapsed: now - prevState.lapStarted
+        }))
     }
 
     handlePlayPause() {
-        console.log('handlePlayPause()')
-        //     // start/resume the timer (adjusting the start time to account for the pause)
-        //     if (!counting) {
-        //         const now = new Date().getTime()
-        //         setState(s => ({
-        //             ...s,
-        //             counting: true,
-        //             started: now - s.elapsed,
-        //             lapStarted: now - s.lapElapsed,
-        //             timer: setInterval(tick, 10)
-        //         }))
-        //     // stop timer
-        //     } else {
-        //         setState(s => ({
-        //             ...s,
-        //             counting: false,
-        //             timer: clearInterval(s.timer)
-        //         }))
-        //     }
+        // start/resume the timer (adjusting the start time to account for the pause)
+        if (!this.state.counting) {
+            const now = new Date().getTime()
+            this.setState(prevState => ({
+                ...prevState,
+                counting: true,
+                started: now - prevState.elapsed,
+                lapStarted: now - prevState.lapElapsed,
+                timer: setInterval(this.tick, 10)
+            }))
+        // stop timer
+        } else {
+            this.setState(prevState => ({
+                ...prevState,
+                counting: false,
+                timer: clearInterval(prevState.timer)
+            }))
+        }
     }
 
     handleLap() {
-        console.log('handleLap()')
-        //     setState(s => ({
-        //         ...s,
-        //         lapStarted: new Date().getTime(),
-        //         lapElapsed: 0,
-        //         laps: [{
-        //             elapsed: s.lapElapsed,
-        //             created: s.elapsed
-        //         }, ...s.laps]
-        //     }))
+        this.setState(prevState => ({
+            ...prevState,
+            lapStarted: new Date().getTime(),
+            lapElapsed: 0,
+            laps: [{
+                elapsed: prevState.lapElapsed,
+                created: prevState.elapsed
+            }, ...prevState.laps]
+        }))
     }
 
     handleReset() {
-        console.log('handleReset')
-        //     setState(s => ({
-        //         ...initialState,
-        //         timer: clearInterval(s.timer)
-        //     }))
+        this.setState(prevState => ({
+            ...this.initialState,
+            timer: clearInterval(prevState.timer)
+        }))
     }
 
     render() {
         return (
-            <Fragment>
-            <div className="pl-5 pr-5">
-                <CircularProgressbarWithChildren value={this.state.elapsed % 60000} maxValue={60000} className="d-felx align-items-center" styles={{path:{transition: 'none'}}}>
-                    <h3 className="mt-4"><Moment format="mm:ss.SS">{this.state.elapsed}</Moment></h3>
-                    <p className="mb-0"><Moment format="mm:ss.SS">{this.state.lapElapsed}</Moment></p>
-                </CircularProgressbarWithChildren>
-            </div>
-            <div className="stopwatch-laps flex-grow-1">
-                {this.state.laps.map((lap, index) => (
-                    <div key={index}>
-                        <div className="d-flex">
-                            <div className="col-6 d-flex flex-column ml-1">
-                                <div className="font-weight-bold" style={{ lineHeight: '1rem'}}>Lap {this.state.laps.length - index}</div>
-                                <div style={{ lineHeight: '1rem'}}><small>Elapsed <Moment format="mm:ss.SS">{lap.elapsed}</Moment></small></div>
+            <div className="stopwatch">
+                <div className="stopwatch__face">
+                    <CircularProgressbarWithChildren
+                        value={this.state.elapsed % 60000}
+                        maxValue={60000}
+                        styles={{path:{transition: 'none'}}}
+                    >
+                        <Moment className="face__time--elapsed" format="mm:ss.S">{this.state.elapsed}</Moment>
+                        <Moment className="face__time--lap-elapsed" format="mm:ss.S">{this.state.lapElapsed}</Moment>
+                    </CircularProgressbarWithChildren>
+                </div>
+                <div className="stopwatch__laps">
+                    {this.state.laps.map((lap, index) => (
+                        <div key={index} className="laps__entry">
+                            <div className="entry__elapsed">
+                                <h4>Lap {this.state.laps.length - index}</h4>
+                                <small><Moment format="mm:ss.S">{lap.elapsed}</Moment></small>
                             </div>
-                            <div className="col-6 d-flex flex-row-reverse align-items-center mr-1">
-                                <h4 className="font-weight-bold mb-0"><Moment format="mm:ss.SS">{lap.created}</Moment></h4>
-                            </div>
+                            <div className="entry__created"><Moment format="mm:ss.S">{lap.created}</Moment></div>
                         </div>
-                        <hr className="mt-1 mb-1"/>
-                    </div>
-                ))}
+                    ))}
+                </div>
+                <div className="stopwatch__controls">
+                    <button className="controls__button controls__button--reset" onClick={this.handleReset}>
+                        <FontAwesomeIcon icon={faUndo}/>
+                    </button>
+                    <button className="controls__button controls__button--play" onClick={this.handlePlayPause}>
+                        <FontAwesomeIcon icon={this.state.counting ? faPause : faPlay} />
+                    </button>
+                    <button className="controls__button controls__button--lap" onClick={this.handleLap} disabled={!this.state.counting}>
+                        <FontAwesomeIcon icon={faStopwatch} />
+                    </button>
+                </div>
             </div>
-            <div className="d-flex justify-content-around ml-5 mr-5">
-                <button className="btn" onClick={this.handleReset}>
-                    <FontAwesomeIcon icon={faUndo}/>
-                </button>
-                <button className="btn btn-light border shadow-sm" onClick={this.handlePlayPause}>
-                    <FontAwesomeIcon icon={this.state.counting ? faPause : faPlay} />
-                </button>
-                <button className="btn" onClick={this.onLap} disabled={!this.state.counting}>
-                    <FontAwesomeIcon icon={faStopwatch} />
-                </button>
-            </div>
-        </Fragment>
         )
     }
 }

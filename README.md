@@ -1,18 +1,17 @@
-# Boilerplate Component
+# Stopwatch
 
-A boilerplate React component project for development and testing before publishing to NPM
+A React widget stopwatch
 
 ## Prerequisites
 
 This component makes use of Bootstrap 4 class names, install bootstrap to your project or apply your own styles to the class names.
 
-* [Bootstrap v4.3](http://www.dropwizard.io/1.0.2/docs/) - Front-end component library
 * [React ^16.9.0](https://reactjs.org/) - Javascript library for user interfaces
 
 ## Installing
 
 ```
-npm install @kevinorriss/boilerplate
+npm install @kevinorriss/stopwatch
 ```
 
 ## Usage
@@ -20,13 +19,13 @@ npm install @kevinorriss/boilerplate
 Import the component
 
 ```
-import Boilerplate from '@kevinorriss/boilerplate'
+import Stopwatch from '@kevinorriss/stopwatch'
 
 ...
 
 <!-- JSX -->
 <div className="your-container">
-    <Boilerplate />
+    <Stopwatch />
 </div>
 ```
 
@@ -40,7 +39,7 @@ cd ./component
 yarn link
 
 cd ..
-yarn link @kevinorriss/boilerplate
+yarn link @kevinorriss/stopwatch
 ```
 
 ### Start the app
@@ -58,7 +57,7 @@ Whenever you make a change to the component code, the react app will update.
 
 ## Tests
 ```
-yarn test
+yarn test --watchAll
 ```
 
 This project uses Jest and Enzyme for its unit tests, simply run the above code to run the test suites.

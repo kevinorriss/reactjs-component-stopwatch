@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Stopwatch correctly 1`] = `
+<div
+  className="stopwatch"
+>
+  <div
+    className="stopwatch__face"
+  >
+    <div
+      data-test-id="CircularProgressbarWithChildren"
+    >
+      <div
+        style={
+          Object {
+            "height": "100%",
+            "position": "relative",
+            "width": "100%",
+          }
+        }
+      >
+        <svg
+          className="CircularProgressbar "
+          data-test-id="CircularProgressbar"
+          viewBox="0 0 100 100"
+        >
+          <path
+            className="CircularProgressbar-trail"
+            d="
+      M 50,50
+      m 0,-46
+      a 46,46 0 1 1 0,92
+      a 46,46 0 1 1 0,-92
+    "
+            fillOpacity={0}
+            strokeWidth={8}
+            style={
+              Object {
+                "strokeDasharray": "289.02652413026095px 289.02652413026095px",
+                "strokeDashoffset": "0px",
+              }
+            }
+          />
+          <path
+            className="CircularProgressbar-path"
+            d="
+      M 50,50
+      m 0,-46
+      a 46,46 0 1 1 0,92
+      a 46,46 0 1 1 0,-92
+    "
+            fillOpacity={0}
+            strokeWidth={8}
+            style={
+              Object {
+                "strokeDasharray": "289.02652413026095px 289.02652413026095px",
+                "strokeDashoffset": "289.02652413026095px",
+                "transition": "none",
+              }
+            }
+          />
+        </svg>
+        <div
+          data-test-id="CircularProgressbarWithChildren__children"
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexDirection": "column",
+              "height": "100%",
+              "justifyContent": "center",
+              "marginTop": "-100%",
+              "position": "absolute",
+              "width": "100%",
+            }
+          }
+        >
+          <time
+            className="face__time--elapsed"
+            dateTime={"1970-01-01T00:00:00.000Z"}
+          >
+            00:00.0
+          </time>
+          <time
+            className="face__time--lap-elapsed"
+            dateTime={"1970-01-01T00:00:00.000Z"}
+          >
+            00:00.0
+          </time>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="stopwatch__laps"
+  />
+  <div
+    className="stopwatch__controls"
+  >
+    <button
+      className="controls__button controls__button--reset"
+      onClick={[Function]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-undo fa-w-16 "
+        data-icon="undo"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={Object {}}
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M212.333 224.333H12c-6.627 0-12-5.373-12-12V12C0 5.373 5.373 0 12 0h48c6.627 0 12 5.373 12 12v78.112C117.773 39.279 184.26 7.47 258.175 8.007c136.906.994 246.448 111.623 246.157 248.532C504.041 393.258 393.12 504 256.333 504c-64.089 0-122.496-24.313-166.51-64.215-5.099-4.622-5.334-12.554-.467-17.42l33.967-33.967c4.474-4.474 11.662-4.717 16.401-.525C170.76 415.336 211.58 432 256.333 432c97.268 0 176-78.716 176-176 0-97.267-78.716-176-176-176-58.496 0-110.28 28.476-142.274 72.333h98.274c6.627 0 12 5.373 12 12v48c0 6.627-5.373 12-12 12z"
+          fill="currentColor"
+          style={Object {}}
+        />
+      </svg>
+    </button>
+    <button
+      className="controls__button controls__button--play"
+      onClick={[Function]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-play fa-w-14 "
+        data-icon="play"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={Object {}}
+        viewBox="0 0 448 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+          fill="currentColor"
+          style={Object {}}
+        />
+      </svg>
+    </button>
+    <button
+      className="controls__button controls__button--lap"
+      disabled={true}
+      onClick={[Function]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-stopwatch fa-w-14 "
+        data-icon="stopwatch"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={Object {}}
+        viewBox="0 0 448 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M432 304c0 114.9-93.1 208-208 208S16 418.9 16 304c0-104 76.3-190.2 176-205.5V64h-28c-6.6 0-12-5.4-12-12V12c0-6.6 5.4-12 12-12h120c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-28v34.5c37.5 5.8 71.7 21.6 99.7 44.6l27.5-27.5c4.7-4.7 12.3-4.7 17 0l28.3 28.3c4.7 4.7 4.7 12.3 0 17l-29.4 29.4-.6.6C419.7 223.3 432 262.2 432 304zm-176 36V188.5c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12V340c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12z"
+          fill="currentColor"
+          style={Object {}}
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
