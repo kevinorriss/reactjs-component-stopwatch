@@ -82,6 +82,7 @@ exports[`should render Stopwatch correctly 1`] = `
             00:00.0
           </time>
           <time
+            className="face__time--lap-elapsed"
             dateTime={"1970-01-01T00:00:00.000Z"}
           >
             00:00.0
@@ -97,7 +98,7 @@ exports[`should render Stopwatch correctly 1`] = `
     className="stopwatch__controls"
   >
     <button
-      className="controls__button"
+      className="controls__button controls__button--reset"
       onClick={[Function]}
     >
       <svg
@@ -141,7 +142,7 @@ exports[`should render Stopwatch correctly 1`] = `
       </svg>
     </button>
     <button
-      className="controls__button"
+      className="controls__button controls__button--lap"
       disabled={true}
       onClick={[Function]}
     >

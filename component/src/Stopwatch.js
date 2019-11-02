@@ -87,7 +87,7 @@ class Stopwatch extends React.Component {
                         styles={{path:{transition: 'none'}}}
                     >
                         <Moment className="face__time--elapsed" format="mm:ss.S">{this.state.elapsed}</Moment>
-                        <Moment format="mm:ss.S">{this.state.lapElapsed}</Moment>
+                        <Moment className="face__time--lap-elapsed" format="mm:ss.S">{this.state.lapElapsed}</Moment>
                     </CircularProgressbarWithChildren>
                 </div>
                 <div className="stopwatch__laps">
@@ -102,13 +102,13 @@ class Stopwatch extends React.Component {
                     ))}
                 </div>
                 <div className="stopwatch__controls">
-                    <button className="controls__button" onClick={this.handleReset}>
+                    <button className="controls__button controls__button--reset" onClick={this.handleReset}>
                         <FontAwesomeIcon icon={faUndo}/>
                     </button>
                     <button className="controls__button controls__button--play" onClick={this.handlePlayPause}>
                         <FontAwesomeIcon icon={this.state.counting ? faPause : faPlay} />
                     </button>
-                    <button className="controls__button" onClick={this.handleLap} disabled={!this.state.counting}>
+                    <button className="controls__button controls__button--lap" onClick={this.handleLap} disabled={!this.state.counting}>
                         <FontAwesomeIcon icon={faStopwatch} />
                     </button>
                 </div>
