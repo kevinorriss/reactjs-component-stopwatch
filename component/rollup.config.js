@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel'
-import { uglify } from 'rollup-plugin-uglify'
 import postcss from 'rollup-plugin-postcss'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
 
 const config = {
     input: 'src/Stopwatch.js',
@@ -12,7 +13,8 @@ const config = {
         babel({
             exclude: "node_modules/**"
         }),
-        uglify()
+        nodeResolve(),
+        commonjs()
     ],
     output: {
         format: 'umd',
